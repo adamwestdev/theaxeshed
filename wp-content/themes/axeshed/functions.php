@@ -16,8 +16,10 @@ function blankslate_load_scripts() {
     wp_deregister_script( 'jquery' );
     wp_enqueue_style( 'fontawesome', get_template_directory_uri().'/fontawesome-free-5.12.1-web/css/all.css' );
     wp_enqueue_style( 'axeshed-style', get_stylesheet_uri() );
+    wp_enqueue_style( 'lightbox-style', '//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.css' );
     wp_enqueue_script( 'jquery', 'https://code.jquery.com/jquery-3.4.1.min.js', array(), '3.4.1', true );
-    wp_enqueue_script( 'axheshed-hs', get_template_directory_uri().'/js/main.js', array(), '1.0.0', true );
+    wp_enqueue_script( 'lightbox-js', '//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.js', array(), '1.7.14', true );
+    wp_enqueue_script( 'axheshed-js', get_template_directory_uri().'/js/main.js', array(), '1.0.0', true );
 }
 
 add_filter( 'document_title_separator', 'blankslate_document_title_separator' );
@@ -93,4 +95,72 @@ function blankslate_comment_count( $count ) {
         } else {
         return $count;
     }
+}
+
+
+// Register Custom Post Type
+function custom_post_type() {
+
+	$labels = array(
+		'name'                  => _x( 'Events', 'Post Type General Name', 'text_domain' ),
+		'singular_name'         => _x( 'Event', 'Post Type Singular Name', 'text_domain' ),
+		'menu_name'             => __( 'Events', 'text_domain' ),
+		'name_admin_bar'        => __( 'Event', 'text_domain' ),
+		'archives'              => __( 'Event Archives', 'text_domain' ),
+		'attributes'            => __( 'Event Attributes', 'text_domain' ),
+		'parent_item_colon'     => __( 'Parent Event:', 'text_domain' ),
+		'all_items'             => __( 'All Events', 'text_domain' ),
+		'add_new_item'          => __( 'Add Event', 'text_domain' ),
+		'add_new'               => __( 'Add Event', 'text_domain' ),
+		'new_item'              => __( 'New Item', 'text_domain' ),
+		'edit_item'             => __( 'Edit Event', 'text_domain' ),
+		'update_item'           => __( 'Update Event', 'text_domain' ),
+		'view_item'             => __( 'View Event', 'text_domain' ),
+		'view_items'            => __( 'View Events', 'text_domain' ),
+		'search_items'          => __( 'Search Events', 'text_domain' ),
+		'not_found'             => __( 'Not found', 'text_domain' ),
+		'not_found_in_trash'    => __( 'Not found in Trash', 'text_domain' ),
+		'featured_image'        => __( 'Featured Image', 'text_domain' ),
+		'set_featured_image'    => __( 'Set featured image', 'text_domain' ),
+		'remove_featured_image' => __( 'Remove featured image', 'text_domain' ),
+		'use_featured_image'    => __( 'Use as featured image', 'text_domain' ),
+		'insert_into_item'      => __( 'Insert into Event', 'text_domain' ),
+		'uploaded_to_this_item' => __( 'Uploaded to this event', 'text_domain' ),
+		'items_list'            => __( 'Events list', 'text_domain' ),
+		'items_list_navigation' => __( 'Events list navigation', 'text_domain' ),
+		'filter_items_list'     => __( 'Filter events list', 'text_domain' ),
+	);
+	$args = array(
+		'label'                 => __( 'Event', 'text_domain' ),
+		'description'           => __( 'Events', 'text_domain' ),
+		'labels'                => $labels,
+		'supports'              => array( 'title', 'editor' ),
+		'taxonomies'            => array( 'category', 'post_tag' ),
+		'hierarchical'          => false,
+        'public'                => true,
+        'show_in_rest'          => true,
+		'show_ui'               => true,
+		'show_in_menu'          => true,
+		'menu_position'         => 5,
+		'show_in_admin_bar'     => true,
+		'show_in_nav_menus'     => true,
+		'can_export'            => true,
+		'has_archive'           => true,
+		'exclude_from_search'   => false,
+		'publicly_queryable'    => true,
+		'capability_type'       => 'page',
+	);
+	register_post_type( 'events', $args );
+
+}
+add_action( 'init', 'custom_post_type', 0 );
+
+if( function_exists('acf_add_options_page') ) {
+	acf_add_options_page(array(
+		'page_title' 	=> 'Site Options',
+		'menu_title'	=> 'Site Options',
+		'menu_slug' 	=> 'site-options',
+		'capability'	=> 'edit_posts',
+		'redirect'		=> false
+    ));
 }

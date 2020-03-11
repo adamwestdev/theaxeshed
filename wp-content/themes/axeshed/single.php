@@ -4,4 +4,5 @@
         <?php the_content(); ?>
     <?php endwhile; endif; ?>
     </main>
+    <?php include( 'inc/homepage/events.php' ); ?>
 <?php get_footer(); ?>
