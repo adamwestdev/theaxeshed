@@ -1,6 +1,15 @@
             <?php $frontpage_id = get_option( 'page_on_front' ); ?>
-            <section class="homepage--content homepage--pricing" id="pricing">
-                <div class="content--container content--blocks container--rows container--space-between section--header">
+            <section class="homepage--content homepage--pricing<?php if( !is_front_page() ) : echo ' page--footer'; endif; ?>">
+                <div class="content--container content--blocks container--rows container--space-between section--header booking--header" id="booknow">
+                    <div class="width--full">
+                        <h1>Online Booking</h1>
+                    </div>
+                    <div class="width--full font-colour--white booking--content">
+                        <p>Fill out our online form to book your lanes. You pay when you show up.</p>
+                        <a href="<?php echo home_url(); ?>/booking-form" class="btn bg--blue">Book Online</a>
+                    </div>
+                </div>
+                <div class="content--container content--blocks container--rows container--space-between section--header" id="pricing">
                     <div class="width--full">
                         <h1>Pricing</h1>
                     </div>

@@ -5,5 +5,10 @@
         <?php the_content(); ?>
     <?php endwhile; endif; ?>
     </main>
+    <?php
+        if( get_the_title() == 'Booking Form' ) :
+            include( 'inc/homepage/pricing.php' );
+        endif;
+    ?>
     <?php endif; ?>
 <?php get_footer(); ?>

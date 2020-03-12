@@ -291,8 +291,8 @@ em {
         height:40px;
         background-image:url(../images/axeshed-border-2.svg);
         background-position: top center;
-        background-repeat: no-repeat;
-        background-size:100% auto;
+        background-repeat: repeat-x;
+        background-size:auto 33px;
     }
     .header--logo,
     .header--nav,
@@ -770,6 +770,15 @@ em {
         h1 {
             color:$white;
             @include single-text-shadow(0,3px,10px,10px,$text);
+        }
+    }
+    .booking--header {
+        .width--full {
+            padding-top:0;
+            padding-bottom:0;
+            .btn {
+                font-size:3.6rem;
+            }
         }
     }
     .content--container,
@@ -1796,4 +1805,18 @@ main[id="content"] {
             padding-left:0;
         }
     }
+}
+
+
+#fbuilder .medium {
+    padding:10px !important;
+    font-size:2rem;
+    border:1px solid $text;
+    @include border-radius(5px);
+}
+#fbuilder .captcha img {
+    width:200px !important;
+}
+#fbuilder .slots {
+    box-sizing: border-box !important;
 }

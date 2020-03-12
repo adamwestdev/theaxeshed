@@ -8,6 +8,7 @@
                         <h2><?php echo get_sub_field( 'hp_header_title_line_one',get_the_ID() ) ?: 'Line one goes here'; ?></h2>
                         <h1><?php echo get_sub_field( 'hp_header_title_line_two',get_the_ID() ) ?: 'Line two goes here'; ?></h1>
                         <h2><?php echo get_sub_field( 'hp_header_title_line_three',get_the_ID() ) ?: 'Line three goes here'; ?></h2>
+                        <a href="<?php echo get_sub_field( 'hp_header_title_url' )['url']; ?>" class="btn bg--orange">Book your lane now!</a>
                         <?php endwhile; ?>
                     </div>
                     <?php endif; ?>
